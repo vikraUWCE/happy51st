@@ -33,13 +33,6 @@
         justify-content: center;
         padding: 40px;
       }
-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  touch-action: none;
-}
 
       .card {
         position: relative;
@@ -275,22 +268,6 @@ canvas {
           font-size: 40px;
         }
       }
-      @media (max-width: 600px) {
-  .card {
-    width: 90vw;
-    padding: 1.2rem;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  #flame {
-    width: 38px;
-    height: 60px;
-  }
-}
-
     </style>
   </head>
   <body>
@@ -390,22 +367,27 @@ canvas {
           color: rgba(255, 255, 255, 0.6);
         "
       >
-    
+        Made with ♥ — Open this file in a browser to see animations
       </footer>
     </div>
 
     <script>
       // helper to size canvases
-     function fitCanvas(c){
-  const rect = c.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-  c.width = Math.round(rect.width * dpr);
-  c.height = Math.round(rect.height * dpr);
-  const ctx = c.getContext("2d");
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  return ctx;
-}
-
+      function fitCanvasToCard(c) {
+        // size canvas to its parent (.card) in CSS pixels, then set backing store for DPR
+        const card = document.querySelector(".card");
+        const rect = card.getBoundingClientRect();
+        const cssW = Math.max(1, Math.floor(rect.width));
+        const cssH = Math.max(1, Math.floor(rect.height));
+        const dpr = Math.max(1, window.devicePixelRatio || 1);
+        c.style.width = cssW + "px";
+        c.style.height = cssH + "px";
+        c.width = Math.floor(cssW * dpr);
+        c.height = Math.floor(cssH * dpr);
+        const ctx = c.getContext("2d");
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return ctx;
+      }
 
       // grab canvases and contexts
       const bgCanvas = document.getElementById("bgCanvas");
@@ -504,13 +486,14 @@ canvas {
         fwCtx.restore();
       }
 
-     function spawnRocket(x){
-  const rect = fwCanvas.getBoundingClientRect();
-  const startX = x || (rect.width * 0.2 + Math.random() * rect.width * 0.6);
-  const startY = rect.height - 10;
-  const targetY = rect.height * (0.15 + Math.random() * 0.35);
-  rockets.push(new Rocket(startX, startY, targetY));
-}
+      function spawnRocket(x) {
+        const rect = fwCanvas.getBoundingClientRect();
+        const startX =
+          typeof x === "number" ? x : 50 + Math.random() * (rect.width - 100);
+        const startY = rect.height - 20;
+        const targetY = 80 + Math.random() * (rect.height * 0.6);
+        rockets.push(new Rocket(startX, startY, targetY));
+      }
 
       // draw loop
       let last = performance.now();
@@ -663,11 +646,6 @@ canvas {
           }, delay);
         })(el);
       }
-
-      window.addEventListener("orientationchange", () => {
-  setTimeout(resizeAll, 300);
-});
-
 
       // little accessibility: pressing space triggers burst
       window.addEventListener("keydown", (e) => {
