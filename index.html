@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy 51st Birthday — Papa</title>
+    <style>
+      :root {
+        --bg1: #0f172a;
+        --bg2: #0b3b2e;
+        --accent: #ffd166;
+        --soft: #ffffffcc;
+        --glass: rgba(255, 255, 255, 0.06);
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+      }
+      body {
+        background: radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 217, 102, 0.06),
+            transparent 10%
+          ),
+          linear-gradient(135deg, var(--bg1), var(--bg2));
+        color: var(--soft);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+      }
+
+      .card {
+        position: relative;
+        width: min(1100px, 96vw);
+        max-width: 1100px;
+        min-height: 520px;
+        border-radius: 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.02)
+        );
+        box-shadow: 0 10px 40px rgba(2, 6, 23, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        padding: 36px;
+        overflow: hidden;
+        backdrop-filter: blur(6px) saturate(120%);
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 12px;
+      }
+      .badge {
+        width: 72px;
+        height: 72px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ff9a9e, #fecfef);
+        color: #2b0a1e;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+
+      h1 {
+        font-size: 48px;
+        margin: 0;
+        line-height: 1;
+        letter-spacing: -1px;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+      }
+      p.lead {
+        margin: 6px 0 0;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .stage {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 24px;
+        height: calc(100% - 120px);
+        align-items: start;
+      }
+
+      .left {
+        padding: 18px;
+        border-radius: 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .message {
+        text-align: center;
+      }
+      .message h2 {
+        font-size: 56px;
+        margin: 0 0 8px;
+        color: var(--accent);
+      }
+      .message p {
+        font-size: 20px;
+        margin: 0 0 10px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      /* Candle */
+      .candle-wrap {
+        margin-top: 48px;
+        display: flex;
+        gap: 18px;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      .candle {
+        width: 56px;
+        height: 140px;
+        background: linear-gradient(180deg, #fff9e6, #ffd68a);
+        border-radius: 10px 10px 6px 6px;
+        position: relative;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .candle::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        width: 36px;
+        height: 12px;
+        background: #fff3c8;
+        border-radius: 6px;
+      }
+      .wick {
+        position: absolute;
+        top: -18px;
+        width: 4px;
+        height: 20px;
+        background: #2b2b2b;
+        border-radius: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .flame {
+        position: absolute;
+        top: -56px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-6deg);
+        width: 28px;
+        height: 48px;
+        border-radius: 50% 50% 40% 40%;
+        background: radial-gradient(
+          circle at 40% 30%,
+          #fff6b2 10%,
+          #ffbd35 35%,
+          #ff5a00 70%
+        );
+        filter: drop-shadow(0 6px 10px rgba(255, 120, 30, 0.25));
+        animation: flicker 1s infinite;
+        mix-blend-mode: screen;
+      }
+      .glow {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 80px;
+        border-radius: 50%;
+        background: radial-gradient(
+          closest-side,
+          rgba(255, 199, 83, 0.25),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      @keyframes flicker {
+        0% {
+          transform: translateX(-50%) rotate(-4deg) scale(1);
+          opacity: 1;
+        }
+        40% {
+          transform: translateX(-50%) rotate(6deg) scale(1.06);
+          opacity: 0.96;
+        }
+        70% {
+          transform: translateX(-50%) rotate(-2deg) scale(0.98);
+          opacity: 0.9;
+        }
+        100% {
+          transform: translateX(-50%) rotate(-4deg) scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Right column */
+      .right {
+        padding: 18px;
+        border-radius: 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+      .count {
+        font-size: 42px;
+        font-weight: 800;
+        color: #fff;
+        margin-top: 6px;
+      }
+
+      /* Footer small text */
+      .from {
+        margin-top: 12px;
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 600;
+      }
+
+      /* canvas layers */
+      canvas {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      /* responsive */
+      @media (max-width: 820px) {
+        .stage {
+          grid-template-columns: 1fr;
+          grid-auto-rows: 1fr;
+        }
+        .right {
+          order: 2;
+        }
+        .left {
+          order: 1;
+        }
+        h1 {
+          font-size: 34px;
+        }
+        .message h2 {
+          font-size: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card" role="main">
+      <canvas id="bgCanvas" style="z-index: 8; pointer-events: none"></canvas>
+      <canvas id="fireworks" style="z-index: 9; pointer-events: none"></canvas>
+      <header>
+        <div class="badge">🎉</div>
+        <div>
+          <h1>Happy 51st Birthday, Papa</h1>
+          <p class="lead">
+            A little celebration made with love — from Leo &amp; Saksham
+          </p>
+        </div>
+      </header>
+
+      <div class="stage">
+        <div class="left">
+          <div class="message">
+            <h2>Happy 51st Birthday!</h2>
+            <p>
+              Wishing you laughter, health, and many more adventures together.
+            </p>
+          </div>
+
+          <div class="candle-wrap" aria-hidden>
+            <div class="candle">
+              <div class="wick"></div>
+              <div class="flame" id="flame"></div>
+              <div class="glow"></div>
+            </div>
+            <div class="candle" style="height: 120px; width: 48px">
+              <div class="wick"></div>
+              <div class="flame"></div>
+              <div class="glow"></div>
+            </div>
+            <div class="candle" style="height: 100px; width: 40px">
+              <div class="wick"></div>
+              <div class="flame"></div>
+              <div class="glow"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="right">
+          <div style="text-align: center">
+            <div style="font-size: 16px; color: rgba(255, 255, 255, 0.7)">
+              Years of awesomeness
+            </div>
+            <div class="count" id="ageCounter">51</div>
+            <div class="from">From — Leo ❤️ Saksham</div>
+          </div>
+
+          <div
+            style="
+              margin-top: auto;
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            <button
+              id="burstBtn"
+              style="
+                padding: 10px 16px;
+                border-radius: 999px;
+                border: 0;
+                background: linear-gradient(90deg, #ffd166, #ff6b6b);
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+              "
+            >
+              Make a big burst!
+            </button>
+            <div
+              style="
+                font-size: 13px;
+                color: rgba(255, 255, 255, 0.6);
+                text-align: center;
+              "
+            >
+              Click the button for an extra firework show
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <footer
+        style="
+          position: absolute;
+          left: 18px;
+          bottom: 12px;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.6);
+        "
+      >
+        Made with ♥ — Open this file in a browser to see animations
+      </footer>
+    </div>
+
+    <script>
+      // helper to size canvases
+      function fitCanvasToCard(c) {
+        // size canvas to its parent (.card) in CSS pixels, then set backing store for DPR
+        const card = document.querySelector(".card");
+        const rect = card.getBoundingClientRect();
+        const cssW = Math.max(1, Math.floor(rect.width));
+        const cssH = Math.max(1, Math.floor(rect.height));
+        const dpr = Math.max(1, window.devicePixelRatio || 1);
+        c.style.width = cssW + "px";
+        c.style.height = cssH + "px";
+        c.width = Math.floor(cssW * dpr);
+        c.height = Math.floor(cssH * dpr);
+        const ctx = c.getContext("2d");
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return ctx;
+      }
+
+      // grab canvases and contexts
+      const bgCanvas = document.getElementById("bgCanvas");
+      const fwCanvas = document.getElementById("fireworks");
+      bgCanvas.style.zIndex = 8;
+      fwCanvas.style.zIndex = 9; // ensure on top
+      bgCanvas.style.pointerEvents = "none";
+      fwCanvas.style.pointerEvents = "none";
+
+      let bgCtx = fitCanvasToCard(bgCanvas);
+      let fwCtx = fitCanvasToCard(fwCanvas);
+
+      function drawBackground() {
+        const rect = bgCanvas.getBoundingClientRect();
+        bgCtx.clearRect(0, 0, rect.width, rect.height);
+        const w = rect.width;
+        const h = rect.height;
+        const g = bgCtx.createLinearGradient(0, 0, w, h);
+        g.addColorStop(0, "rgba(255,255,255,0.02)");
+        g.addColorStop(1, "rgba(0,0,0,0.02)");
+        bgCtx.fillStyle = g;
+        bgCtx.fillRect(0, 0, w, h);
+        for (let i = 0; i < 120; i++) {
+          const x = Math.random() * w;
+          const y = Math.random() * h;
+          const r = Math.random() * 1.4;
+          bgCtx.beginPath();
+          bgCtx.fillStyle = "rgba(255,255,255," + Math.random() * 0.6 + ")";
+          bgCtx.arc(x, y, r, 0, Math.PI * 2);
+          bgCtx.fill();
+        }
+      }
+
+      // Fireworks system (robust with rect-based coords)
+      const particles = [];
+      const rockets = [];
+
+      function Rocket(x, y, targetY) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 1.6;
+        this.vy = -(3 + Math.random() * 3);
+        this.targetY = targetY;
+        this.color = `hsl(${Math.floor(Math.random() * 360)},90%,60%)`;
+        this.trail = [];
+      }
+      Rocket.prototype.update = function (dt) {
+        this.trail.push({ x: this.x, y: this.y });
+        if (this.trail.length > 8) this.trail.shift();
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
+        this.vy += 0.04 * dt; // gravity
+        if (this.y <= this.targetY) {
+          explode(this.x, this.y, this.color);
+          return false;
+        }
+        return true;
+      };
+
+      function Particle(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * (3 + Math.random() * 4);
+        this.vy = (Math.random() - 0.5) * (3 + Math.random() * 4);
+        this.life = 60 + Math.random() * 60;
+        this.color = color;
+        this.size = 1 + Math.random() * 2;
+        this.age = 0;
+        this.decay = 0.97 + Math.random() * 0.01;
+      }
+      Particle.prototype.update = function (dt) {
+        this.x += this.vx * dt;
+        this.y += this.vy * dt;
+        this.vy += 0.06 * dt;
+        this.vx *= 0.998;
+        this.vy *= 0.998;
+        this.age += dt;
+        this.size *= this.decay;
+        if (this.age > this.life) return false;
+        return true;
+      };
+
+      function explode(x, y, color) {
+        const count = 24 + Math.floor(Math.random() * 36);
+        for (let i = 0; i < count; i++)
+          particles.push(new Particle(x, y, color));
+        // draw an immediate flash so user sees something even if loop timing odd
+        const rect = fwCanvas.getBoundingClientRect();
+        fwCtx.save();
+        fwCtx.beginPath();
+        fwCtx.arc(x, y, 20, 0, Math.PI * 2);
+        fwCtx.fillStyle = color;
+        fwCtx.globalAlpha = 0.9;
+        fwCtx.fill();
+        fwCtx.globalAlpha = 1;
+        fwCtx.restore();
+      }
+
+      function spawnRocket(x) {
+        const rect = fwCanvas.getBoundingClientRect();
+        const startX =
+          typeof x === "number" ? x : 50 + Math.random() * (rect.width - 100);
+        const startY = rect.height - 20;
+        const targetY = 80 + Math.random() * (rect.height * 0.6);
+        rockets.push(new Rocket(startX, startY, targetY));
+      }
+
+      // draw loop
+      let last = performance.now();
+      function loop(t) {
+        const dt = Math.min((t - last) / 16, 4);
+        last = t;
+        const rect = fwCanvas.getBoundingClientRect();
+        fwCtx.clearRect(0, 0, rect.width, rect.height);
+        for (let i = rockets.length - 1; i >= 0; i--) {
+          if (!rockets[i].update(dt)) rockets.splice(i, 1);
+        }
+        for (let i = particles.length - 1; i >= 0; i--) {
+          if (!particles[i].update(dt)) particles.splice(i, 1);
+        }
+        rockets.forEach((r) => {
+          fwCtx.beginPath();
+          fwCtx.moveTo(r.x, r.y);
+          const trail = r.trail;
+          for (let i = trail.length - 1; i >= 0; i--) {
+            fwCtx.lineTo(trail[i].x, trail[i].y);
+          }
+          fwCtx.strokeStyle = r.color;
+          fwCtx.lineWidth = 2;
+          fwCtx.stroke();
+          fwCtx.beginPath();
+          fwCtx.arc(r.x, r.y, 3, 0, Math.PI * 2);
+          fwCtx.fillStyle = r.color;
+          fwCtx.fill();
+        });
+        particles.forEach((p) => {
+          fwCtx.beginPath();
+          fwCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          fwCtx.fillStyle = p.color;
+          fwCtx.globalAlpha = Math.max(0, 1 - p.age / p.life);
+          fwCtx.fill();
+          fwCtx.globalAlpha = 1;
+        });
+        requestAnimationFrame(loop);
+      }
+
+      // periodic fireworks
+      let periodicId = setInterval(() => {
+        try {
+          spawnRocket();
+        } catch (e) {
+          console.warn("spawnRocket fail", e);
+        }
+      }, 900);
+      requestAnimationFrame(loop);
+
+      // burst button (robust)
+      const burstBtn = document.getElementById("burstBtn");
+      burstBtn.addEventListener("click", () => {
+        try {
+          const rect = fwCanvas.getBoundingClientRect();
+          const cx = rect.width / 2 || window.innerWidth / 2;
+          const cy = rect.height * 0.35 || 180;
+          explode(cx, cy, `hsl(${Math.floor(Math.random() * 360)},90%,60%)`);
+          spawnRocket(cx);
+          for (let i = 0; i < 12; i++) {
+            setTimeout(() => {
+              spawnRocket(
+                50 +
+                  Math.random() * (fwCanvas.getBoundingClientRect().width - 100)
+              );
+            }, i * 120);
+          }
+        } catch (err) {
+          console.error("burst error", err);
+          // fallback: draw a simple DOM explosion
+          const dot = document.createElement("div");
+          dot.style.position = "absolute";
+          dot.style.left = "50%";
+          dot.style.top = "30%";
+          dot.style.transform = "translate(-50%,-50%)";
+          dot.style.width = "160px";
+          dot.style.height = "160px";
+          dot.style.borderRadius = "50%";
+          dot.style.background = "radial-gradient(circle,#fff6b2, #ff5a00 60%)";
+          dot.style.zIndex = 20;
+          document.querySelector(".card").appendChild(dot);
+          setTimeout(() => dot.remove(), 700);
+        }
+      });
+
+      // candle flicker variation using JS to vary flame size
+      const flame = document.getElementById("flame");
+      function flameLoop() {
+        if (!flame) return;
+        const s = 0.9 + Math.random() * 0.25;
+        const r = -6 + Math.random() * 12;
+        flame.style.transform = `translateX(-50%) rotate(${r}deg) scale(${s})`;
+        flame.style.opacity = 0.85 + Math.random() * 0.2;
+        requestAnimationFrame(() =>
+          setTimeout(flameLoop, 120 + Math.random() * 200)
+        );
+      }
+      flameLoop();
+
+      // responsive canvas resize
+      function resizeAll() {
+        bgCtx = fitCanvasToCard(bgCanvas);
+        fwCtx = fitCanvasToCard(fwCanvas);
+        drawBackground();
+      }
+      window.addEventListener("resize", resizeAll);
+
+      // gentle floating confetti overlay — using DOM elements for variety
+      const confettiCount = 30;
+      for (let i = 0; i < confettiCount; i++) {
+        const el = document.createElement("div");
+        el.style.position = "absolute";
+        el.style.left = Math.random() * 100 + "%";
+        el.style.top = -20 - Math.random() * 80 + "px";
+        const w = 6 + Math.random() * 12;
+        el.style.width = w + "px";
+        el.style.height = 8 + Math.random() * 10 + "px";
+        el.style.background = `linear-gradient(180deg, hsl(${
+          Math.random() * 360
+        },80%,60%), hsl(${Math.random() * 360},60%,45%))`;
+        el.style.opacity = 0.95;
+        el.style.borderRadius = "3px";
+        el.style.transform = `rotate(${Math.random() * 360}deg)`;
+        el.style.pointerEvents = "none";
+        el.style.zIndex = 2;
+        el.style.transition = `transform ${
+          10 + Math.random() * 8
+        }s linear, top ${10 + Math.random() * 8}s linear, left ${
+          10 + Math.random() * 8
+        }s linear, opacity 1s linear`;
+        document.querySelector(".card").appendChild(el);
+        (function animateConfetti(e) {
+          const left = Math.random() * 100;
+          const delay = Math.random() * 3000;
+          setTimeout(() => {
+            e.style.top = window.innerHeight + 60 + "px";
+            e.style.left = Math.min(98, Math.random() * 100) + "%";
+            e.style.transform = `rotate(${
+              Math.random() * 360
+            }deg) translateY(0)`;
+            e.style.opacity = 0.9;
+            setTimeout(() => {
+              e.remove();
+              const ne = e.cloneNode();
+              ne.style.top = -60 - Math.random() * 80 + "px";
+              ne.style.left = Math.random() * 100 + "%";
+              document.querySelector(".card").appendChild(ne);
+              animateConfetti(ne);
+            }, 12000);
+          }, delay);
+        })(el);
+      }
+
+      // little accessibility: pressing space triggers burst
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          burstBtn.click();
+        }
+      });
+
+      // initial small bursts
+      setTimeout(() => {
+        for (let i = 0; i < 3; i++) setTimeout(() => spawnRocket(), i * 550);
+      }, 800);
+    </script>
+  </body>
+</html>
